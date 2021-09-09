@@ -54,7 +54,7 @@
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg border border-black">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-1 ">
                         <div class="p-6">
-                            @livewire('card', [
+                            @livewire('container-card', [
                                 'icone' => 'lni-question-circle',
                                 'titulo' => 'Precisando de companhia para jogar?',
                                 'corpo' => 'Disponibilidade é um fator decisivo em jogos, principalmente em 
@@ -65,7 +65,7 @@
                     
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
 
-                            @livewire('card', [
+                            @livewire('container-card', [
                                 'icone' => 'lni-xbox',
                                 'titulo' => 'Uma possível solução..',
                                 'corpo' => 'Uma plataforma criada para unir jogadores de todos os países para
@@ -74,7 +74,7 @@
                                 ])
                         </div>
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            @livewire('card', [
+                            @livewire('container-card', [
                                 'icone' => 'lni-playstation',
                                 'titulo' => 'O telegram é útil mas..',
                                 'corpo' => "Já é comprovado que qualquer atividade que requer
@@ -84,7 +84,7 @@
                                 ])
                         </div>
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            @livewire('card', [
+                            @livewire('container-card', [
                                 'icone' => 'lni-happy',
                                 'titulo' => 'Jogos cooperativos são para jogar juntos!',
                                 'corpo' => "Chega de ficar se isolando, jogando offline para não te chamarem
