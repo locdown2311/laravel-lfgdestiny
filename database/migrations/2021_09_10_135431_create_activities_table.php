@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivities extends Migration
+class CreateActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateActivities extends Migration
      */
     public function up()
     {
-        Schema::create('activity', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->datetime('horario');
-            $table->integer('qtd_jogadores');
-            $table->text('observacao');
-        });
+            Schema::create('activity', function (Blueprint $table) {
+                $table->bigIncrements('id');;
+                $table->unsignedBigInteger('category_id');
+                $table->foreign('category_id')->references('id')->on('categories');
+                $table->datetime('horario');
+                $table->integer('qtd_jogadores');
+                $table->text('observacao');
+            });
+        
     }
 
     /**
