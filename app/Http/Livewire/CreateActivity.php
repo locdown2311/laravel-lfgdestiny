@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-
+use App\Models\Category;
 class CreateActivity extends Component
 {
     public 
-        $atividades,
+        $categorias,
         $atividade_id,
         $categoria_id,
         $horario_atv,
@@ -18,6 +18,7 @@ class CreateActivity extends Component
 
     public function render()
     {
+        $this->categorias = Category::all();
         return view('livewire.create-activity');
     }
 
