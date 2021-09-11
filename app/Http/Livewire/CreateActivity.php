@@ -4,11 +4,15 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Activity;
 class CreateActivity extends Component
 {
-    public 
+    public
+        $gAtividade,
+        $atividades,
         $categorias,
         $atividade_id,
+        $criado_por,
         $categoria_id,
         $horario_atv,
         $qtd_jogadores,
@@ -74,13 +78,16 @@ class CreateActivity extends Component
             'observacao' => 'max:100'
         ]);
     
-        Todo::updateOrCreate(['id' => $this->todo_id], [
-            'title' => $this->title,
-            'description' => $this->description
+        Activity::updateOrCreate(['id' => $this->atividade_id], [
+            'criado_por' => Auth::user()->name,
+            'categoria_id' => $this->categoria_id,
+            'horario_atv' => $this->horario_atv,
+            'qtd_jogadores' => $this->qtd_jogadores,
+            'observacao' => $this->observacao
         ]);
    
         session()->flash('message', 
-            $this->todo_id ? 'Todo Updated Successfully.' : 'Todo Created Successfully.');
+            $this->atividade_id ? 'Todo Updated Successfully.' : 'Todo Created Successfully.');
    
         $this->closeModal();
         $this->resetInputFields();
@@ -92,12 +99,16 @@ class CreateActivity extends Component
      */
     public function edit($id)
     {
-        $Todo = Todo::findOrFail($id);
-        $this->todo_id = $id;
-        $this->title = $Todo->title;
-        $this->description = $Todo->description;
-     
-        $this->openModal();
+        $gAtividade = Atividade::findOrFail($id);
+        $user = Auth::user();
+        if($user->can('edit', $gAtividade)){
+            $this->atividade_id = $id;
+            $this->categoria_id = $gAtividade->categoria_id;
+            $this->horario_atv = $gAtividade->horario_atv;
+            $this->qtd_jogadores = $gAtividade->qtd_jogadores;
+            $this->observacao = $gAtividade->observacao;   
+            $this->openModal();
+        }
     }
       
     /**
@@ -107,7 +118,13 @@ class CreateActivity extends Component
      */
     public function delete($id)
     {
-        Todo::find($id)->delete();
-        session()->flash('message', 'Todo Deleted Successfully.');
+        $gAtividade = Atividade::findOrFail($id);
+        $user = Auth::user();
+
+        if($user->can('delete',$gAtividade)){
+            Atividade::find($id)->delete();
+            session()->flash('message', 'Todo Deleted Successfully.');
+        }
+      
     }
 }
