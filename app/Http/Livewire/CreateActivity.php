@@ -11,17 +11,21 @@ class CreateActivity extends Component
         $gAtividade,
         $atividades,
         $categorias,
+        $atividades_usu,
         $atividade_id,
         $criado_por,
         $categoria_id,
         $horario_atv,
         $qtd_jogadores,
+        $convertido,
         $observacao;
+
         
     public $isOpen = 0;
 
     public function render()
     {
+        $this->atividades_usu = Activity::with('category')->get();
         $this->categorias = Category::all();
         return view('livewire.create-activity');
     }
@@ -59,9 +63,9 @@ class CreateActivity extends Component
      */
     private function resetInputFields(){
         $this->categoria_id = '';
-        $this->$horario_atv = '';
-        $this->$qtd_jogadores = '';
-        $this->$observacao ='';
+        $this->horario_atv = '';
+        $this->qtd_jogadores = '';
+        $this->observacao ='';
     }
       
     /**
@@ -71,20 +75,24 @@ class CreateActivity extends Component
      */
     public function store()
     {
+        $this->criado_por = \Auth::id();
+        
+
         $this->validate([
             'categoria_id' => 'required',
             'horario_atv' => 'required',
             'qtd_jogadores' => 'required',
             'observacao' => 'max:100'
         ]);
+        $categoria = Category::findOrFail($this->categoria_id);
     
-        Activity::updateOrCreate(['id' => $this->atividade_id], [
-            'criado_por' => Auth::user()->name,
-            'categoria_id' => $this->categoria_id,
-            'horario_atv' => $this->horario_atv,
-            'qtd_jogadores' => $this->qtd_jogadores,
-            'observacao' => $this->observacao
-        ]);
+        $dados = new Activity();
+        $dados->user_id = $this->criado_por;
+        $dados->horario = $this->horario_atv;
+        $dados->qtd_jogadores = $this->qtd_jogadores;
+        $dados->observacao = $this->observacao;
+        $dados->category()->associate($categoria);
+        $dados->save();
    
         session()->flash('message', 
             $this->atividade_id ? 'Todo Updated Successfully.' : 'Todo Created Successfully.');
@@ -99,16 +107,14 @@ class CreateActivity extends Component
      */
     public function edit($id)
     {
-        $gAtividade = Atividade::findOrFail($id);
-        $user = Auth::user();
-        if($user->can('edit', $gAtividade)){
-            $this->atividade_id = $id;
-            $this->categoria_id = $gAtividade->categoria_id;
-            $this->horario_atv = $gAtividade->horario_atv;
-            $this->qtd_jogadores = $gAtividade->qtd_jogadores;
-            $this->observacao = $gAtividade->observacao;   
-            $this->openModal();
-        }
+        $gAtividade = Activity::findOrFail($id);
+        $this->atividade_id = $id;
+        $this->categoria_id = $gAtividade->categoria_id;
+        $this->horario_atv = $gAtividade->horario_atv;
+        $this->qtd_jogadores = $gAtividade->qtd_jogadores;
+        $this->observacao = $gAtividade->observacao;   
+        $this->openModal();
+        
     }
       
     /**
@@ -118,13 +124,7 @@ class CreateActivity extends Component
      */
     public function delete($id)
     {
-        $gAtividade = Atividade::findOrFail($id);
-        $user = Auth::user();
-
-        if($user->can('delete',$gAtividade)){
-            Atividade::find($id)->delete();
-            session()->flash('message', 'Todo Deleted Successfully.');
-        }
-      
+        $gAtividade = Activity::findOrFail($id)->delete();
+        session()->flash('message', 'Tarefa concluida com sucesso.');
     }
 }

@@ -15,7 +15,8 @@ class CreateActivitiesTable extends Migration
     {
             Schema::create('activity', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('criado_por');
+                $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users');
                 $table->unsignedBigInteger('category_id');
                 $table->foreign('category_id')->references('id')->on('categories');
                 $table->datetime('horario');
