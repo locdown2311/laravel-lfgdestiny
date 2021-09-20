@@ -23,6 +23,7 @@ class CreateActivitiesTable extends Migration
                 $table->integer('qtd_jogadores');
                 $table->text('observacao')->nullable();
                 $table->timestamps();
+                $table->softDeletes($column = 'deleted_at', $precision = 0);
             });
         
     }

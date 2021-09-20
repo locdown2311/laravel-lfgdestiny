@@ -8,13 +8,14 @@
     <div class="py-12">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                @livewire('container-card', [
-                                'icone' => 'lni-question-circle',
-                                'titulo' => 'Precisando de companhia para jogar?',
-                                'corpo' => 'Disponibilidade é um fator decisivo em jogos, principalmente em 
-                                        atividades de vários jogadores. Em Destiny isso se repete com grupos
-                                        cada vez menos participativos.'
-                            ])
+                <x-container-card>
+                    <x-slot name="icone">lni-question-circle</x-slot>
+                    <x-slot name="titulo">Precisando de companhia para jogar?</x-slot>
+                    <x-slot name="corpo">
+                        Comece procurando uma atividade existente.
+                        <p>Caso não encontre, crie uma.</p>
+                    </x-slot>
+                </x-container-card>
             </div>
         </div>
     </div>

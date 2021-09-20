@@ -20,19 +20,21 @@ class CreateActivity extends Component
         $convertido,
         $observacao;
 
-        
+    public $updateMode = false;
     public $isOpen = 0;
 
     public function render()
     {
-        $this->atividades_usu = Activity::with('category')->get();
+        $this->atividades_usu = Activity::with('category')
+                                ->where('user_id','=',\Auth::id())
+                                ->get();
         $this->categorias = Category::all();
         return view('livewire.create-activity');
     }
 
     public function create()
     {
-        $this->resetInputFields();
+        $this->reset();
         $this->openModal();
     }
    
@@ -61,12 +63,6 @@ class CreateActivity extends Component
      *
      * @var array
      */
-    private function resetInputFields(){
-        $this->categoria_id = '';
-        $this->horario_atv = '';
-        $this->qtd_jogadores = '';
-        $this->observacao ='';
-    }
       
     /**
      * The attributes that are mass assignable.
@@ -95,27 +91,27 @@ class CreateActivity extends Component
         $dados->save();
    
         session()->flash('message', 
-            $this->atividade_id ? 'Todo Updated Successfully.' : 'Todo Created Successfully.');
+            $this->atividade_id ? 'Atividade atualizada com sucesso.' : 'Atividade criada com sucesso.');
    
         $this->closeModal();
-        $this->resetInputFields();
+        $this->reset();
     }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public function edit($id)
-    {
-        $gAtividade = Activity::findOrFail($id);
-        $this->atividade_id = $id;
-        $this->categoria_id = $gAtividade->categoria_id;
-        $this->horario_atv = $gAtividade->horario_atv;
-        $this->qtd_jogadores = $gAtividade->qtd_jogadores;
-        $this->observacao = $gAtividade->observacao;   
-        $this->openModal();
+    // public function edit($id)
+    // {
+    //     $gAtividade = Activity::findOrFail($id);
+    //     $this->atividade_id = $id;
+    //     $this->categoria_id = $gAtividade->categoria_id;
+    //     $this->horario_atv = $gAtividade->horario_atv;
+    //     $this->qtd_jogadores = $gAtividade->qtd_jogadores;
+    //     $this->observacao = $gAtividade->observacao;   
+    //     $this->openModal();
         
-    }
+    // }
       
     /**
      * The attributes that are mass assignable.

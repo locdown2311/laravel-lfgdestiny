@@ -17,5 +17,10 @@ use App\Http\Livewire\CreateActivity;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/new-activity',CreateActivity::class)->name('newactivity');
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/new-activity',CreateActivity::class)->name('newactivity');
+});
+
