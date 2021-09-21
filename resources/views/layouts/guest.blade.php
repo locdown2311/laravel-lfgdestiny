@@ -12,10 +12,12 @@
 
 
         <!-- Styles -->
-        <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css"> 
+        {{-- <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">  --}}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <!-- Scripts -->
+        <script src="https://kit.fontawesome.com/c4e03d5795.js" crossorigin="anonymous"></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>

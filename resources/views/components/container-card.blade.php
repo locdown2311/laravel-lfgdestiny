@@ -1,7 +1,7 @@
 <div>
         <div class="p-6">
             <div class="flex items-center">
-                <i class="lni {{$icone}}"></i>
+                <i class="{{$icone}}"></i>
               <div class="ml-4 text-lg leading-7 font-semibold">
                    {{ $titulo }}
               </div>

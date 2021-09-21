@@ -9,8 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css"> 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <style>
@@ -22,6 +22,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <script src="https://kit.fontawesome.com/c4e03d5795.js" crossorigin="anonymous"></script>
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -57,7 +58,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-1 ">
                         <div class="p-6">
                             <x-container-card>
-                                <x-slot name="icone">lni-question-circle</x-slot>
+                                <x-slot name="icone">fas fa-question-circle</x-slot>
                                 <x-slot name="titulo">Precisando de companhia para jogar?</x-slot>
                                 <x-slot name="corpo">
                                     Disponibilidade é um fator decisivo em jogos, principalmente em 
@@ -70,7 +71,7 @@
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
 
                             <x-container-card>
-                                <x-slot name="icone">lni-xbox</x-slot>
+                                <x-slot name="icone">fab fa-xbox</x-slot>
                                 <x-slot name="titulo">Uma possível solução..</x-slot>
                                 <x-slot name="corpo">
                                     Uma plataforma criada para unir jogadores de todos os países para
@@ -81,7 +82,7 @@
                         </div>
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <x-container-card>
-                                <x-slot name="icone">lni-playstation</x-slot>
+                                <x-slot name="icone">fab fa-playstation</x-slot>
                                 <x-slot name="titulo">O telegram é útil mas..</x-slot>
                                 <x-slot name="corpo">
                                     Já é comprovado que qualquer atividade que requer
@@ -93,7 +94,7 @@
                         </div>
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
                             <x-container-card>
-                                <x-slot name="icone">lni-happy</x-slot>
+                                <x-slot name="icone">fas fa-smile-wink</x-slot>
                                 <x-slot name="titulo">Jogos cooperativos são para jogar juntos!</x-slot>
                                 <x-slot name="corpo">
                                     Chega de ficar se isolando, jogando offline para não te chamarem

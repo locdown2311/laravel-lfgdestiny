@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Livewire\CreateActivity;
+use App\Http\Livewire\ViewActivity;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,5 +23,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/new-activity',CreateActivity::class)->name('newactivity');
+    Route::get('/view/{id}',ViewActivity::class);
 });
 

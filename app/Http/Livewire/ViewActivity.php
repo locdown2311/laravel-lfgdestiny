@@ -7,8 +7,14 @@ use App\Models\Activity;
 class ViewActivity extends Component
 {
 
-    public Atividade $activity;
-
+    public $dados;
+ 
+    public function mount($id)
+    {
+        $this->dados = Activity::with('category','user')
+                        ->where('id','=',$id)
+                        ->get();
+    }
     public function render()
     {
         return view('livewire.view-activity');
