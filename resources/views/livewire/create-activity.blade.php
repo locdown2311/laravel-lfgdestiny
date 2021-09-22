@@ -1,4 +1,7 @@
 <div>
+    <x-slot name="titulo">
+        Nova Atividade
+    </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gerenciador de Atividades</h2>
     </x-slot>
@@ -56,7 +59,7 @@
                                             <option value="6">6</option>
                                         </select>
                                         @error('qtd_jogadores') <span class="text-red-500">{{ $message }}</span>@enderror
-                                    </div>   
+                                    </div>
                                     <div class="mb-4">
                                         <label for="obsAtividade"
                                             class="block text-gray-700 text-sm font-bold mb-2">Observações:</label>
@@ -65,7 +68,7 @@
                                             id="obsAtividade" wire:model="observacao"
                                             placeholder="Favor usar tal tipo de arma | Ter paciência"></textarea>
                                         @error('mobile') <span class="text-red-500">{{ $message }}</span>@enderror
-                                    </div>                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -85,7 +88,7 @@
                         </form>
                     </x-slot>
                 </x-custom-modal>
-                @endif          
+                @endif
             </div>
             @if (count($atividades_usu) > 0)
             <div class="mt-3 bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -101,7 +104,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach ($atividades_usu as $atividade)
                         <tr>
                             <td class="border px-4 py-2 text-center">{{ $atividade->id }}</td>
@@ -123,5 +126,4 @@
             @endif($atividades_usu)
         </div>
     </div>
-    
 </div>
