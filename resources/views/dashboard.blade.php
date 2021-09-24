@@ -16,6 +16,11 @@
                     <x-slot name="corpo">
                         Comece procurando uma atividade existente abaixo.
                         <p>Caso não encontre, crie uma.</p>
+                        @if (session()->has('message'))
+                            <x-info-alert>
+                                <x-slot name="corpo">{{ session('message') }}</x-slot>
+                            </x-info-alert>
+                        @endif
                     </x-slot>
                 </x-container-card>
 

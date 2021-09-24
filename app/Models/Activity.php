@@ -12,9 +12,8 @@ class Activity extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['user_id','category_id','horario','qtd_jogadores','observacao'];
-    protected $table = "activity";
     protected $softDelete = true;
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

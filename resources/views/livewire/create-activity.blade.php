@@ -13,7 +13,7 @@
                     role="alert">
                     <div class="flex">
                         <div>
-                            <p class="text-sm">{{ session('message') }}</p>
+                            <p class="text-sm text-red-500">{{ session('message') }}</p>
                         </div>
                     </div>
                 </div>

@@ -13,11 +13,11 @@ class CreateActivitiesTable extends Migration
      */
     public function up()
     {
-            Schema::create('activity', function (Blueprint $table) {
+            Schema::create('activities', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->unsignedBigInteger('user_id');
-                $table->foreign('user_id')->references('id')->on('users');
-                $table->unsignedBigInteger('category_id');
+                $table->foreignId('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreignId('category_id');
                 $table->foreign('category_id')->references('id')->on('categories');
                 $table->datetime('horario');
                 $table->integer('qtd_jogadores');
@@ -25,7 +25,7 @@ class CreateActivitiesTable extends Migration
                 $table->timestamps();
                 $table->softDeletes($column = 'deleted_at', $precision = 0);
             });
-        
+
     }
 
     /**
