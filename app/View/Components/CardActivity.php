@@ -2,9 +2,10 @@
 
 namespace App\View\Components;
 
+use App\Models\Activity;
 use Illuminate\View\Component;
 
-class CustomModal extends Component
+class CardActivity extends Component
 {
     /**
      * Create a new component instance.
@@ -22,6 +23,6 @@ class CustomModal extends Component
      */
     public function render()
     {
-        return view('components.custom-modal');
+        return view('components.card-activity');
     }
 }

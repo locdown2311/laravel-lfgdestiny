@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/new-activity',CreateActivity::class)->name('newactivity');
-    Route::get('/view/{id}',ViewActivity::class);
+    Route::get('/new-activity',CreateActivity::class)->name('new.activity');
+    Route::get('/view/{id}',ViewActivity::class)->name('view.activity');
 });
 

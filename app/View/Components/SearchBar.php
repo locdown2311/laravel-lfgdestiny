@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class CustomModal extends Component
+class SearchBar extends Component
 {
     /**
      * Create a new component instance.
@@ -15,6 +15,7 @@ class CustomModal extends Component
     {
         //
     }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -22,6 +23,6 @@ class CustomModal extends Component
      */
     public function render()
     {
-        return view('components.custom-modal');
+        return view('components.search-bar');
     }
 }

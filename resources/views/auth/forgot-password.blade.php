@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <x-slot name="titulo">Esqueci a senha</x-slot>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
