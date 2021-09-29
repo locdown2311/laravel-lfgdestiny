@@ -27,7 +27,11 @@
             </div>
         </div>
     </div>
+    @can ('manage users')
+        <p>Ola admin</p>
+    @endcan
     <!-- Refazer os cards abaixo -->
+    @can ('view activity')
     <div class="container mx-auto px-5">
         <div class="-mx-3 flex flex-wrap">
             @foreach($dados as $info)
@@ -58,6 +62,6 @@
                 </div>
             @endforeach
         </div>
-
     </div>
+    @endcan
 </x-app-layout>
