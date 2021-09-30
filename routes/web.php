@@ -29,6 +29,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('manage/categories',ManageCategory::class)->name('manage.category');
+    Route::get('manage/categories',\App\Http\Livewire\ManageCategory::class)->name('manage.category');
 });
 
