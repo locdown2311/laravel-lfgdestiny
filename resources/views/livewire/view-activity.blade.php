@@ -7,13 +7,13 @@
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                 <div class="px-4 py-5 sm:px-6">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Informações da atividade de identificação: {{$dados[0]->id}}
+                        Informações da atividade de identificação: {{$dados->slug}}
                     </h3>
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">
                         <i class="far fa-clock"></i> Essa atividade está planejada para ocorrer à partir de:
                         <span class="font-extrabold">
                         @php
-                            $date = new Datetime($dados[0]->horario);
+                            $date = new Datetime($dados->horario);
                             echo $date->format('d/m H:i')
                         @endphp
                         </span>
@@ -26,7 +26,7 @@
                                 <i class="text-red-500 far fa-id-card"></i> Criado por
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{$dados[0]->user->name}}
+                                {{$dados->user->name}}
                             </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -34,7 +34,7 @@
                                 <i class="fas fa-directions"></i> Atividade proposta
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{$dados[0]->category->descricao}}
+                                {{$dados->category->descricao}}
                             </dd>
                         </div>
                         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -42,7 +42,7 @@
                                 <i class="text-blue-500 fas fa-info-circle"></i> Tipo de atividade
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 uppercase">
-                                {{$dados[0]->category->tipo}}
+                                {{$dados->category->tipo}}
                             </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -50,7 +50,18 @@
                                 <i class="fas fa-list-ol"></i> Jogadores necessários
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{$dados[0]->qtd_jogadores}}
+                                {{$dados->qtd_jogadores}}
+                            </dd>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                                <i class="fas fa-spinner"></i> Progresso da Lista
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                <div class="p-6 space-y-2 artboard phone">
+                                    <progress class="progress" value="{{$iParticipantes}}" max="{{$dados->qtd_jogadores}}"></progress>
+                                </div>
+
                             </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -58,22 +69,16 @@
                                 <i class=" text-green-400 fas fa-grin-wink"></i> Participe da atividade
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <button wire:click="joinActivity({{$dados[0]->id}})"
-                                        @php
-                                            if($participando)
-                                                echo 'disabled';
-                                        else echo ''
-                                        @endphp
-                                        type="button"
-                                        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-400 disabled:opacity-25 text-base leading-6 font-bold text-white shadow-sm sm:text-sm sm:leading-5">
-                                    Participar
-                                </button>
-                                <button wire:click="quitActivity({{$dados[0]->id}})"
-                                        @php if(!$participando)echo ''; else 'disabled' @endphp
-                                        type="button"
-                                        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-red-600 disabled:opacity-25 text-base leading-6 font-bold text-white shadow-sm sm:text-sm sm:leading-5">
-                                    Sair
-                                </button>
+                                <div class="btn-group">
+                                    @cannot('join activity')
+                                        <button wire:click="goBack()" class="btn btn-outline">Fechar aba (usuário suspenso)</button>
+                                    @endcannot
+                                    @can('join activity')
+                                        <button wire:click="joinActivity({{$dados->id}})" class="btn {{$participando ? "btn-disabled":"btn-success"}}">Participar</button>
+                                        <button wire:click="quitActivity({{$dados->id}})" class="btn {{$participando ? "btn-error":"btn-disabled"}}">Sair</button>
+                                        <button wire:click="goBack()" class="btn btn-outline">Fechar aba</button>
+                                        @endcan
+                                </div>
                             </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

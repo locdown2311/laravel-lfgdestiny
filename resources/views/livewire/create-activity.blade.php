@@ -9,19 +9,21 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 @if (session()->has('message'))
-                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                    role="alert">
-                    <div class="flex">
-                        <div>
-                            <p class="text-sm text-red-500">{{ session('message') }}</p>
-                        </div>
-                    </div>
-                </div>
+                    <x-info-alert>
+                        <x-slot name="corpo">{{ session('message') }}</x-slot>
+                    </x-info-alert>
                 @endif
+                @can('create activity')
                 <button wire:click="create()"
-                    class="my-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">
+                    class="my-4 inline-flex justify-center w-full btn btn-outline btn-primary">
                     Iniciar atividade
                 </button>
+                    @endcan
+                    @cannot('create activity')
+                        <button class="my-4 inline-flex justify-center btn btn-disabled w-full">
+                            Suspenso da criação de atividades
+                        </button>
+                    @endcannot
                 @if($isOpen)
                 <x-custom-modal>
                     <x-slot name="content">
@@ -113,10 +115,12 @@
                             <td class="border px-4 py-2 text-center">{{ $atividade->qtd_jogadores}}</td>
                             <td class="border px-4 py-2 text-center">{{ $atividade->observacao}}</td>
                             <td class="border px-4 py-2 text-center">
-
-                            <x-jet-button class="bg-green-300 mt-1 border-black">
-                                <a wire:click="delete({{ $atividade->id }})">Concluir</a>
-                            </x-jet-button>
+                                @can('finish activity')
+                                    <button wire:click.prevent="delete({{$atividade->id}})" class="btn btn-outline btn-accent">Concluir</button>
+                                @endcan
+                                @cannot('finish activity')
+                                        <button class="btn btn-disabled">(Suspenso)</button>
+                                    @endcannot
                             </td>
                         @endforeach
                         </tr>

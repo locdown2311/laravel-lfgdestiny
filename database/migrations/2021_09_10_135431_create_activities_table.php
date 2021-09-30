@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->foreignId('category_id');
                 $table->foreign('category_id')->references('id')->on('categories');
+                $table->string('slug')->unique();
                 $table->datetime('horario');
                 $table->integer('qtd_jogadores');
                 $table->text('observacao')->nullable();

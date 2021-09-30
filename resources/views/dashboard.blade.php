@@ -7,7 +7,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-10">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-container-card>
@@ -16,26 +16,27 @@
                     <x-slot name="corpo">
                         Comece procurando uma atividade existente abaixo.
                         <p>Caso não encontre, crie uma.</p>
-                        @if (session()->has('message'))
-                            <x-info-alert>
-                                <x-slot name="corpo">{{ session('message') }}</x-slot>
-                            </x-info-alert>
-                        @endif
                     </x-slot>
                 </x-container-card>
+                <div class="py-2">
+
+                    @if (session()->has('message'))
+                        <x-info-alert>
+                            <x-slot name="corpo">{{ session('message') }}</x-slot>
+                        </x-info-alert>
+                    @endif
+                </div>
 
             </div>
         </div>
     </div>
-    @can ('manage users')
-        <p>Ola admin</p>
-    @endcan
     <!-- Refazer os cards abaixo -->
     @can ('view activity')
-    <div class="container mx-auto px-5">
-        <div class="-mx-3 flex flex-wrap">
+    <div class="pt-2">
+        <div class="grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($dados as $info)
-                <div>
+                <div class="m-6 indicator">
+                    <div class="indicator-item badge badge-primary">NOVA</div>
                     <x-card-activity>
                         <x-slot name="tipo">
                             {{$info->category->tipo}}
@@ -56,7 +57,7 @@
                             {{$info->user->name}}
                         </x-slot>
                         <x-slot name="conferir">
-                            {{$info->id}}
+                            {{$info->slug}}
                         </x-slot>
                     </x-card-activity>
                 </div>

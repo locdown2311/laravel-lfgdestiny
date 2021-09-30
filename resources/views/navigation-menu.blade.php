@@ -15,9 +15,14 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('new.activity') }}" :active="request()->routeIs('newactivity')">
+                    <x-jet-nav-link href="{{ route('create.activity') }}" :active="request()->routeIs('create.activity')">
                         {{ __('New Activity') }}
                     </x-jet-nav-link>
+                    @can('create category')
+                    <x-jet-nav-link href="{{ route('manage.category') }}" :active="request()->routeIs('manage.category')">
+                        {{ __('Manage Categories') }}
+                    </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -143,9 +148,15 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('new.activity') }}" :active="request()->routeIs('newactivity')">
+            <x-jet-responsive-nav-link href="{{ route('create.activity') }}" :active="request()->routeIs('create.activity')">
                 {{ __('New Activity') }}
             </x-jet-responsive-nav-link>
+
+            @can('create category')
+            <x-jet-responsive-nav-link href="{{ route('manage.category') }}" :active="request()->routeIs('manage.category')">
+                {{ __('Manage Categories') }}
+            </x-jet-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

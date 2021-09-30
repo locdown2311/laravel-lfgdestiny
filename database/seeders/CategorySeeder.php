@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
         ]);
         Category::create([
             'tipo' => 'raid',
-            'descricao' => 'Cripta da Pedra Profunda',
+            'descricao' => 'Cripta da Pedra',
         ]);
         Category::create([
             'tipo' => 'raid',

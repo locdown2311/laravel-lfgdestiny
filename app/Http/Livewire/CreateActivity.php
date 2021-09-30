@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use Auth;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Activity;
+use Illuminate\Support\Str;
+
 class CreateActivity extends Component
 {
     public
-        $gAtividade,
         $atividades,
         $categorias,
         $atividades_usu,
@@ -26,7 +28,7 @@ class CreateActivity extends Component
     public function render()
     {
         $this->atividades_usu = Activity::with('category')
-                                ->where('user_id','=',\Auth::id())
+                                ->where('user_id','=', Auth::id())
                                 ->get();
         $this->categorias = Category::all();
         return view('livewire.create-activity');
@@ -37,7 +39,7 @@ class CreateActivity extends Component
         $this->reset();
         $this->openModal();
     }
-   
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,7 +49,7 @@ class CreateActivity extends Component
     {
         $this->isOpen = true;
     }
-   
+
     /**
      * The attributes that are mass assignable.
      *
@@ -57,13 +59,13 @@ class CreateActivity extends Component
     {
         $this->isOpen = false;
     }
-   
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-      
+
     /**
      * The attributes that are mass assignable.
      *
@@ -71,8 +73,8 @@ class CreateActivity extends Component
      */
     public function store()
     {
-        $this->criado_por = \Auth::id();
-        
+        $this->criado_por = Auth::id();
+
 
         $this->validate([
             'categoria_id' => 'required',
@@ -81,18 +83,19 @@ class CreateActivity extends Component
             'observacao' => 'max:100'
         ]);
         $categoria = Category::findOrFail($this->categoria_id);
-    
+
         $dados = new Activity();
         $dados->user_id = $this->criado_por;
         $dados->horario = $this->horario_atv;
+        $dados->slug = $random = Str::random(5).Str::limit($categoria->name,5).$this->qtd_jogadores;
         $dados->qtd_jogadores = $this->qtd_jogadores;
         $dados->observacao = $this->observacao;
         $dados->category()->associate($categoria);
         $dados->save();
-   
-        session()->flash('message', 
+
+        session()->flash('message',
             $this->atividade_id ? 'Atividade atualizada com sucesso.' : 'Atividade criada com sucesso.');
-   
+
         $this->closeModal();
         $this->reset();
     }
@@ -108,11 +111,11 @@ class CreateActivity extends Component
     //     $this->categoria_id = $gAtividade->categoria_id;
     //     $this->horario_atv = $gAtividade->horario_atv;
     //     $this->qtd_jogadores = $gAtividade->qtd_jogadores;
-    //     $this->observacao = $gAtividade->observacao;   
+    //     $this->observacao = $gAtividade->observacao;
     //     $this->openModal();
-        
+
     // }
-      
+
     /**
      * The attributes that are mass assignable.
      *
@@ -120,7 +123,7 @@ class CreateActivity extends Component
      */
     public function delete($id)
     {
-        $gAtividade = Activity::findOrFail($id)->delete();
+        Activity::findOrFail($id)->delete();
         session()->flash('message', 'Tarefa concluida com sucesso.');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\View\Components;
 
 use App\Models\Activity;
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class CardActivity extends Component
@@ -19,7 +21,7 @@ class CardActivity extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
     public function render()
     {
