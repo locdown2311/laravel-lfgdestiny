@@ -30,7 +30,7 @@
       </p>
       <div class="divider"></div>
       <div class="form-control">
-          <p><i class="fas fa-paperclip"></i> <input type="text" class="input input-bordered" readonly value="{{ route('view.activity',['slug' => $conferir]) }}"></p>
+          <p><i class="fas fa-paperclip"></i> <input type="text" class="input input-bordered w-full" readonly value="{{ route('view.activity',['slug' => $conferir]) }}"></p>
       </div>
       <div class="justify-end card-actions">
         <a class="btn btn-outline btn-accent" href="{{ route('view.activity',['slug' => $conferir]) }}"><span><i class="fas fa-info-circle"></i> Mais informações</span> </a>
