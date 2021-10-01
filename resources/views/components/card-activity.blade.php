@@ -1,4 +1,4 @@
-<div class="card bordered">
+<div class="card bordered bg-white">
   <figure>
     <img src=
          @switch($tipo)
